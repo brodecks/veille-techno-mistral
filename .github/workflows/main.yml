@@ -1,0 +1,25 @@
+on:
+   schedule:
+     - cron: "15 10 * * *"
+jobs:
+  veille-techno-mistral:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Get latest code
+      uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run script
+      env:
+        MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+        NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
+        MAIL_FROM: ${{ secrets.MAIL_FROM }}
+        MAIL_TO: ${{ secrets.MAIL_TO }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      run: python src/agent_veille_llm.py
