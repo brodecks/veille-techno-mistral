@@ -75,7 +75,7 @@ def fetch_newsapi(query="LLM OR agent IA OR intelligence artificielle"):
 
 def summarize_with_mistral(text):
     prompt = (
-        "Résume cet article en 2-3 phrases en français. "
+        "Résume cet article en 1 paragraphe de quelques phrases en français. "
         "Focus sur les points clés pour un expert en IA :\n\n" + text
     )
     with Mistral(api_key=MISTRAL_API_KEY) as client:
@@ -97,8 +97,8 @@ def generate_report(articles):
             summary = summarize_with_mistral(content)
             report += (
                 f"### [{article['title']}]({article['url']})\n"
-                f"*Source : {article['source']}*\n"
-                f"**Résumé :** {summary}\n\n---\n\n"
+                f"Source : {article['source']}\n"
+                f"Résumé : {summary}\n\n---\n\n"
             )
         except Exception as e:
             report += f"### [Erreur] {article['title']} : {str(e)}\n\n"
