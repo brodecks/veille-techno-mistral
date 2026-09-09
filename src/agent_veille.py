@@ -101,7 +101,7 @@ def generate_report(articles):
                 f"Source : {article['source']}\n"
                 f"Résumé : {summary}\n\n---\n\n"
             )
-            time.sleep(2)
+            time.sleep(5)
         except Exception as e:
             report += f"### [Erreur] {article['title']} : {str(e)}\n\n"
     return report
