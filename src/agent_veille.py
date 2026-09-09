@@ -7,6 +7,7 @@ from mistralai.client import Mistral
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+import time
 
 load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 
@@ -100,6 +101,7 @@ def generate_report(articles):
                 f"Source : {article['source']}\n"
                 f"Résumé : {summary}\n\n---\n\n"
             )
+            time.sleep(2)
         except Exception as e:
             report += f"### [Erreur] {article['title']} : {str(e)}\n\n"
     return report
